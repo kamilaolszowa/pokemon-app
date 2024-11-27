@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="pokemon-cards">
+        <mat-card *ngFor="let pokemon of pokemonList" class="pokemon-card">
+            <mat-card-header>
+                <mat-card-title><strong>{{ pokemon.name }}</strong></mat-card-title>
+            </mat-card-header>
+            <img mat-card-image [src]="getPokemonImage(pokemon.url)" [alt]="pokemon.name" />
+            <button *ngIf="!pokemon.details" mat-flat-button color="primary" (click)="getPokemonDetails(pokemon)">
+                Show details
+            </button>
+            <ng-container *ngIf="pokemon.details">
+                <mat-card-content *ngIf="pokemon.details">
+                    <p><b>Height:</b> {{ pokemon.details.height }}</p>
+                    <p><b>Weight:</b> {{ pokemon.details.weight }}</p>
+                    <p><b>Types:</b> {{ getPokemonTypes(pokemon) }}</p>
+                </mat-card-content>
+            </ng-container>
+        </mat-card>
+        <button mat-flat-button color="primary" (click)="fetchMorePokemons()">
+            Show more
+        </button>
+    </div>
+
+</div>
